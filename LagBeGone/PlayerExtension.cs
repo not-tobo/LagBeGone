@@ -5,6 +5,7 @@ namespace PlayerExtension
 {
     public static class PlayerExtension
     {
+        
         public static APIUser GetAPIUser(this VRC.Player Instance) =>
             Instance.prop_APIUser_0;
 

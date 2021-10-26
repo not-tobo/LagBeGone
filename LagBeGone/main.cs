@@ -17,7 +17,6 @@ namespace LagBeGone
         public static readonly string SettingsCategory = "LagBeGone";
         public static readonly string entrySizeLimit = "sizeLimit";
         public static readonly string entrySpamProtection = "spamProtection";
-        public static readonly string entryFullBlock = "fullBlock";
 
         public static bool sizeLimit
         {
@@ -31,18 +30,11 @@ namespace LagBeGone
             set { MelonPreferences.SetEntryValue<bool>(SettingsCategory, entrySizeLimit, value); }
         }
 
-        public static bool fullBlock
-        {
-            get { return MelonPreferences.GetEntryValue<bool>(SettingsCategory, entryFullBlock); }
-            set { MelonPreferences.SetEntryValue<bool>(SettingsCategory, entryFullBlock, value); }
-        }
-
         public override void OnApplicationStart()
         {
             MelonCoroutines.Start(StartUiManagerInitIEnumerator());
             MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySizeLimit, true, "Event 9 Size Limiter [good against Event 9 Lagger]");
             MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySpamProtection, true, "Event 9 Spam Protection [good against Photon Bots]");
-            MelonPreferences.CreateEntry<bool>(SettingsCategory, entryFullBlock, true, "Block all Event 9 [idk, dont use it. It breaks Avatar 3.0 sync]");
         }
 
         private IEnumerator StartUiManagerInitIEnumerator()

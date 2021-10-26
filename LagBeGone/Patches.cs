@@ -99,15 +99,12 @@ namespace HarmonyPatches
             {
                 int playerID = __0.Sender;;
 
-                if (LagBeGone.main.fullBlock)
-                    return false;
-
                 if (LagBeGone.main.sizeLimit)
                 {
                     byte[] syncData = (byte[])Serialize.Serialize.FromIL2CPPToManaged<object>(__0.CustomData);
                     if (syncData.Length > 220)
                     {
-                        if (countLagger > 99 && !laggerLogged)
+                        if (countLagger > 50 && !laggerLogged)
                         {
                             laggerLogged = true;
                             LagBeGone.main.TopiLogger(PlayerManagerExtension.PlayerManagerExtension.GetPlayer(PlayerManagerExtension.PlayerManagerExtension.PlayerManager, playerID).field_Private_VRCPlayerApi_0.displayName + " is using a Event 9 Lagger!", ConsoleColor.Red, "size");
@@ -121,7 +118,7 @@ namespace HarmonyPatches
                         {
                             countLagger = 0;
                         });
-                        LagBeGone.main.TopiLogger("[Debug] Blocked Event 9 because Size to big (Size: " + syncData.Length, ConsoleColor.Gray, "size");
+                        //LagBeGone.main.TopiLogger("[Debug] Blocked Event 9 because Size to big (Size: " + syncData.Length, ConsoleColor.Gray, "size");
                         return false;
                     }
                 }
