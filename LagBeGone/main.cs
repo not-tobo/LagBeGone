@@ -17,6 +17,8 @@ namespace LagBeGone
         public static readonly string SettingsCategory = "LagBeGone";
         public static readonly string entrySizeLimit = "sizeLimit";
         public static readonly string entrySpamProtection = "spamProtection";
+        public static readonly string entrySizeLimitValue = "sizeLimitValue";
+        public static readonly string entrySpamProtectionValue = "spamProtectionValue";
 
         public static bool sizeLimit
         {
@@ -26,8 +28,20 @@ namespace LagBeGone
 
         public static bool spamProtection
         {
-            get { return MelonPreferences.GetEntryValue<bool>(SettingsCategory, entrySizeLimit); }
-            set { MelonPreferences.SetEntryValue<bool>(SettingsCategory, entrySizeLimit, value); }
+            get { return MelonPreferences.GetEntryValue<bool>(SettingsCategory, entrySpamProtection); }
+            set { MelonPreferences.SetEntryValue<bool>(SettingsCategory, entrySpamProtection, value); }
+        }
+
+        public static int sizeLimitValue
+        {
+            get { return MelonPreferences.GetEntryValue<int>(SettingsCategory, entrySizeLimitValue); }
+            set { MelonPreferences.SetEntryValue<int>(SettingsCategory, entrySizeLimitValue, value); }
+        }
+
+        public static int spamProtectionValue
+        {
+            get { return MelonPreferences.GetEntryValue<int>(SettingsCategory, entrySpamProtectionValue); }
+            set { MelonPreferences.SetEntryValue<int>(SettingsCategory, entrySpamProtectionValue, value); }
         }
 
         public override void OnApplicationStart()
@@ -35,6 +49,8 @@ namespace LagBeGone
             MelonCoroutines.Start(StartUiManagerInitIEnumerator());
             MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySizeLimit, true, "Event 9 Size Limiter [good against Event 9 Lagger]");
             MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySpamProtection, true, "Event 9 Spam Protection [good against Photon Bots]");
+            MelonPreferences.CreateEntry<int>(SettingsCategory, entrySizeLimitValue, 224, "Event 9 max Size [you shouldnt change this tbh]");
+            MelonPreferences.CreateEntry<int>(SettingsCategory, entrySpamProtectionValue, 420, "Event 9 Spam Limit [idk, maybe more is possible?]");
         }
 
         private IEnumerator StartUiManagerInitIEnumerator()
