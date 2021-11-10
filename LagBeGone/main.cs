@@ -8,8 +8,8 @@ namespace LagBeGone
     {
         public const string Name = "LagBeGone";
         public const string Author = "Topi#1337";
-        public const string Version = "0.1.1";
-        public const string DownloadLink = "";
+        public const string Version = "0.1.2";
+        public const string DownloadLink = "https://github.com/not-tobo/LagBeGone";
     }
 
     public class main : MelonMod
