@@ -48,9 +48,9 @@ namespace LagBeGone
         {
             MelonCoroutines.Start(StartUiManagerInitIEnumerator());
             MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySizeLimit, true, "Event 9 Size Limiter [good against Event 9 Lagger]");
-            MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySpamProtection, true, "Event 9 Spam Protection [good against Photon Bots]");
+            MelonPreferences.CreateEntry<bool>(SettingsCategory, entrySpamProtection, true, "Event 6/9 Spam Protection [good against Photon Bots]");
             MelonPreferences.CreateEntry<int>(SettingsCategory, entrySizeLimitValue, 224, "Event 9 max Size [you shouldnt change this tbh]");
-            MelonPreferences.CreateEntry<int>(SettingsCategory, entrySpamProtectionValue, 420, "Event 9 Spam Limit [idk, maybe more is possible?]");
+            MelonPreferences.CreateEntry<int>(SettingsCategory, entrySpamProtectionValue, 420, "Event 6/9 Spam Limit [idk, maybe more is possible?]");
         }
 
         private IEnumerator StartUiManagerInitIEnumerator()
