@@ -88,44 +88,47 @@ namespace HarmonyPatches
         }
 
         public static List<string> blacklistedUsers = new List<string>();
-        public static int countEvent9 = 0;
+        public static int countEvents = 0;
         public static int countLagger = 0;
         public static bool laggerLogged = false;
         public static bool blocked = false;
 
         private static bool OnEvent(ref EventData __0)
         {
-            if (__0.Code == 9)
+            if (__0.Code == 9 || __0.Code == 6)
             {
                 int playerID = __0.Sender;;
 
                 if (LagBeGone.main.spamProtection)
                 {
                     if (blocked)
+                    {
+                        countEvents++;
                         return false;
-                    if (countEvent9 >= LagBeGone.main.spamProtectionValue)
+                    }  
+                    if (countEvents >= LagBeGone.main.spamProtectionValue)
                     {
                         if(!blocked)
                         {
-                            LagBeGone.main.TopiLogger("Blocking Event 9 for 10 seconds", ConsoleColor.Red, "spam");
+                            LagBeGone.main.TopiLogger("Blocking Event 6/9 for 10 seconds", ConsoleColor.Red, "spam");
                             blocked = true;
                             Delay(10f, delegate
                             {
-                                LagBeGone.main.TopiLogger("Unblocked Event 9", ConsoleColor.Green, "spam");
-                                countEvent9 = 0;
+                                LagBeGone.main.TopiLogger("Unblocked Event 6/ 9 [ " + countEvents + " blocked]", ConsoleColor.Green, "spam");
+                                countEvents = 0;
                                 blocked = false;
                             });
                         }
                         return false;
                     }
-                    countEvent9++;
+                    countEvents++;
                     //LagBeGone.main.TopiLogger("[Debug] Event 9 Counter: " + countEvent9, ConsoleColor.DarkGray, "spam");
                     Delay(1f, delegate
                     {
-                        countEvent9 = 0;
+                        countEvents = 0;
                     });
                 }
-                if (LagBeGone.main.sizeLimit)
+                if (LagBeGone.main.sizeLimit && __0.Code == 9)
                 {
                     byte[] syncData = (byte[])Serialize.Serialize.FromIL2CPPToManaged<object>(__0.CustomData);
                     if (syncData.Length >= LagBeGone.main.sizeLimitValue)
